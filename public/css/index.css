@@ -10,6 +10,8 @@ header{
     background-repeat: no-repeat;
     background-size: cover;
     padding-top: 20%;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 header > .banner{
@@ -17,6 +19,10 @@ header > .banner{
     margin: auto;
     text-align: center;
     color: white;
+    background-color: #ffa500b8; /*orange con un poco de transparencia*/
+    border: 1px solid #ff8c005e; /*darkorange con mucha transparencia*/
+    border-radius: 50px;
+    color: #966100;
 }
 
 .contenido{
@@ -25,7 +31,11 @@ header > .banner{
 
 .sinopsis{
     height: 175px;
-    overflow: scroll;
+    overflow-y: scroll;
+}
+.sinopsis p{
+    margin-right: 10px;
+    margin-left: 10px;
 }
 .thumbnail > img, .thumbnail a > img{
     height: 350px;
@@ -33,9 +43,13 @@ header > .banner{
 
 .cuadrito{
     /*background-color: #ffffff68;*/
-    background-color: #e6e6e633;
+    background-color: #e6e6e6cc;
 }
 
+.btn-descarga{
+    margin-top: 15px;
+    font-weight: bold;
+}
 
 /* PAGINA AUTORES*/
 .img-autor{
@@ -44,48 +58,32 @@ header > .banner{
 
 .bio-autor{
     max-height: 370px;
-    overflow: scroll;
+    overflow-y: scroll;
+}
+.bio-autor img{
+    width: 200px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.bio-autor p{
+    margin-left: 10px;
+    margin-right: 10px;
 }
 .autor {
     max-width: 80%;
     margin-left: auto;
     margin-right: auto;
 }
-/*
-.image {
-    opacity: 1;
-    display: block;
-    height: auto;
-    transition: .5s ease;
-    backface-visibility: hidden;
-}
 
-.middle {
-    transition: .5s ease;
-    opacity: 0;
-    position: absolute;
-    top: 50%;
-    left: 40%;
-    transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%)
-}
 
-.image:hover {
-    opacity: 0.7;
-}
+/* ---------------------------------- Libro -------------------------------------------- */
 
-.image:hover .middle{
-    opacity: 1;
+.seccion-libro {
+    background-image: url('../img/libro2.jpg');
+    background-size: cover;
+    background-position: center center;
+    height: 500px;
 }
-
-.text {
-    background-color: #4CAF50;
-    color: white;
-    font-size: 16px;
-    padding: 16px 32px;
-}
-*/
-
 
 /* ---------------------------------- NAVBAR -------------------------------------------*/
 .navbar-inverse{
@@ -103,7 +101,7 @@ header > .banner{
 
 /* ----------------------------------FOOTER -------------------------------------------*/
 .footer-distributed .footer-icons a:hover{
-    color:  #5383d3;
+    color:  orange;
 }
 
 
@@ -116,7 +114,6 @@ header > .banner{
     font: bold 16px sans-serif;
 
     padding: 55px 50px;
-    margin-top: 80px;
 }
 
 .footer-distributed .footer-left,
@@ -141,7 +138,7 @@ header > .banner{
 }
 
 .footer-distributed h3 span{
-    color:  #5383d3;
+    color:  orange;
 }
 
 /* Footer links */
@@ -205,7 +202,7 @@ header > .banner{
 }
 
 .footer-distributed .footer-center p a{
-    color:  #5383d3;
+    color:  orange;
     text-decoration: none;;
 }
 
@@ -251,6 +248,8 @@ header > .banner{
 
     margin-right: 3px;
     margin-bottom: 5px;
+
+    padding-top: 7px;
 }
 
 /* If you don't want the footer to be responsive, remove these media queries */
@@ -284,7 +283,10 @@ header > .banner{
 .text-muted{
     text-align: center;
 }
-
+#services{
+     padding-top: 40px;
+     padding-bottom: 70px;
+ }
 #services, #services i{
     color: orange;
 }

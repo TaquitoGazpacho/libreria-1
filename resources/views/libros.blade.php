@@ -20,7 +20,7 @@
                                     <p>{!! str_replace('\n', '<br/>', $libro->descripcion) !!}</p>
                                 </div>
 
-                                <a class="fa fa-download" href="{{ asset('ebooks').'/'.$libro->ebook }}">Descargar</a>
+                                <a href="{{ asset('ebooks').'/'.$libro->ebook }}" ><button type="button" class="btn btn-warning btn-descarga">Descarga</button></a>
                             </div>
                         </div>
                     </div>

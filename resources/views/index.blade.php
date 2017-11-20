@@ -14,7 +14,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">At Your Service</h2>
+                    <h2 class="section-heading">A tu disposición</h2>
                     <hr class="my-4">
                 </div>
             </div>
@@ -23,34 +23,38 @@
             <div class="row">
                 <div class="col-lg-3 col-md-6 text-center">
                     <div class="service-box mt-5 mx-auto">
-                        <i class="fa fa-4x fa-diamond text-primary mb-3 sr-icons"></i>
-                        <h3 class="mb-3">Sturdy Templates</h3>
-                        <p class="text-muted mb-0">Our templates are updated regularly so they don't break.</p>
+                        <i class="fa fa-4x fa-download text-primary mb-3 sr-icons"></i>
+                        <h3 class="mb-3">Descarga directa</h3>
+                        <p class="text-muted mb-0">¡Descarga tus libros favoritos en un solo click!</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 text-center">
                     <div class="service-box mt-5 mx-auto">
-                        <i class="fa fa-4x fa-paper-plane text-primary mb-3 sr-icons"></i>
-                        <h3 class="mb-3">Ready to Ship</h3>
-                        <p class="text-muted mb-0">You can use this theme as is, or you can make changes!</p>
+                        <i class="fa fa-4x fa-subway text-primary mb-3 sr-icons"></i>
+                        <h3 class="mb-3">Libros donde quieras</h3>
+                        <p class="text-muted mb-0">¡Descarga y lee cuando quieras y desde cualquier sitio!</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 text-center">
                     <div class="service-box mt-5 mx-auto">
-                        <i class="fa fa-4x fa-newspaper-o text-primary mb-3 sr-icons"></i>
-                        <h3 class="mb-3">Up to Date</h3>
-                        <p class="text-muted mb-0">We update dependencies to keep things fresh.</p>
+                        <i class="fa fa-4x fa-user text-primary mb-3 sr-icons"></i>
+                        <h3 class="mb-3">Opción de ser miembro</h3>
+                        <p class="text-muted mb-0">¡Únete a nosotros para información exclusiva!</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 text-center">
                     <div class="service-box mt-5 mx-auto">
-                        <i class="fa fa-4x fa-heart text-primary mb-3 sr-icons"></i>
-                        <h3 class="mb-3">Made with Love</h3>
-                        <p class="text-muted mb-0">You have to make your websites with love these days!</p>
+                        <i class="fa fa-4x fa-book text-primary mb-3 sr-icons"></i>
+                        <h3 class="mb-3">Información</h3>
+                        <p class="text-muted mb-0">¡Infórmate sobre tus libros o autores cuando quieras!</p>
                     </div>
                 </div>
             </div>
         </div>
+    </section>
+
+    <section class="seccion-libro">
+
     </section>
 
 

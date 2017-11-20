@@ -25,17 +25,17 @@
 
         <div>
             <i class="fa fa-map-marker"></i>
-            <p><span>21 Revolution Street</span> Paris, France</p>
+            <p><span>Alejandria Kalea, 2</span> Donostia, Gipuzkoa</p>
         </div>
 
         <div>
             <i class="fa fa-phone"></i>
-            <p>+1 555 123456</p>
+            <p>+34 943 32 60 88</p>
         </div>
 
         <div>
             <i class="fa fa-envelope"></i>
-            <p><a href="mailto:support@company.com">support@company.com</a></p>
+            <p><a href="mailto:support@electricsheep.com">Contact Us</a></p>
         </div>
 
     </div>

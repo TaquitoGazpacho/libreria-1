@@ -1,11 +1,11 @@
-@extends('layouts.app')
+@extends('templates.master')
 
-@section('content')
-<div class="container">
+@section('contenido')
+<div class="container" style="margin-top: 100px;">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
+                <div class="panel-heading">Zona en Desarrollo</div>
 
                 <div class="panel-body">
                     @if (session('status'))
@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    <img style="display: block; margin: auto;" src="{{ asset('img/sheep.jpg') }}" alt="Zona en desarrollo">
                 </div>
             </div>
         </div>

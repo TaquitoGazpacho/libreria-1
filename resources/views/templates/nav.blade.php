@@ -6,12 +6,12 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Electric<span>Sheep</span></a>
+            <a class="navbar-brand" href="{{ route('index') }}">Electric<span>Sheep</span></a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li class="{{ Request::segment(1) === 'index' ? 'active' : null }}"><a href="{{ route('index') }}">Home</a></li>
-                <li class="{{ Request::segment(1) === 'libros' ? 'active' : null }}"><a href="{{ route('libros') }}">Libros</a></li>
+                <li class="{{ Route::current()->getName() == 'index' ? 'active' : null }}"><a href="{{ route('index') }}">Home</a></li>
+                <li class="{{ Route::current()->getName() == 'libros' ? 'active' : null }}"><a href="{{ route('libros') }}">Libros</a></li>
 
                 <li class="dropdown {{ Request::segment(1) === 'autores' ? 'active' : null }}">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Autores <span class="caret"></span></a>
@@ -26,8 +26,31 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li class="{{ Request::segment(1) === 'register' ? 'active' : null }}"><a href="{{ route('register') }}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                <li class="{{ Request::segment(1) === 'login' ? 'active' : null }}"><a href="{{ route('login') }}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                @guest
+                    <li class="{{ Route::current()->getName() == 'register' ? 'active' : null }}"><a href="{{ route('register') }}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                    <li class="{{ Route::current()->getName() == 'login' ? 'active' : null }}"><a href="{{ route('login') }}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                @else
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+                            {{ Auth::user()->name }} <span class="caret"></span>
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            <li><a href="{{ route('home') }}">Zona Usuario</a></li>
+                            <li>
+                                <a href="{{ route('logout') }}"
+                                   onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();">
+                                    Logout
+                                </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    {{ csrf_field() }}
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+                @endguest
             </ul>
         </div>
     </div>

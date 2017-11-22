@@ -5,8 +5,11 @@
 @section('contenido')
     <header>
         <div class="banner">
-            <h1>Librería androide/blade runner</h1>
+            <h1>Librería Androide / Blade Runner</h1>
             <h2>Permitido acceso a replicantes y ovejas eléctricas</h2>
+        </div>
+        <div class="desc">
+            <h3>Librería especializada en los autores de ciencia ficción más reconocidos del siglo XX</h3>
         </div>
     </header>
 

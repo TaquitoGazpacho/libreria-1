@@ -64,8 +64,8 @@
 
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
-                                    <button type="submit" class="btn btn-primary">
-                                        Register
+                                    <button type="submit" class="btn btn-warning">
+                                        <b>Register</b>
                                     </button>
                                 </div>
                             </div>

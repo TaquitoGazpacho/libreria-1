@@ -21,7 +21,7 @@
                                 </div>
 
 
-                                <div class="modal fade" id="{!! str_replace('¿', '',$libro->apellido) !!}" role="dialog">
+                                <div class="modal fade" id="{!! str_replace(str_split(' ?¿'), '_',$libro->titulo) !!}" role="dialog">
                                     <div class="modal-dialog">
 
                                         <!-- Modal content-->
@@ -43,7 +43,7 @@
 
                                     </div>
                                 </div>
-                                <button type="button" class="btn btn-info btn-descarga" data-toggle="modal" data-target="#{!! str_replace('¿', '',$libro->apellido) !!}">Leer Mas</button>
+                                <button type="button" class="btn btn-info btn-descarga" data-toggle="modal" data-target="#{!! str_replace(str_split(' ?¿'), '_',$libro->titulo) !!}">Leer Mas</button>
 
 
 

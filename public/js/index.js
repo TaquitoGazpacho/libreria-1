@@ -20,6 +20,7 @@ $( document ).ready(function(){
            url: url,
            success: function(data) {
                if (data !== ""){
+                   $(".modal-footer input[type='submit']").remove();
                    continuarCompra(data);
                } else {
                    loginLockBox();
@@ -94,9 +95,79 @@ $( document ).ready(function(){
         })
     }
 
-    function continuarCompra(usuario){
+    function continuarCompra(datos){
         $("#modalBody").children().remove();
-        $("#modalBody").append("Oficinas!!!")
+        $("#modalBody").append("OFICINAS");
+        $("<form/>", {
+            id: "formOficinas",
+            action: "#",
+            method: "post",
+        }).appendTo("#modalBody");
+        $("<input/>", {
+            name: "selectOficina",
+            value: "defecto",
+            type: "radio"
+        }).appendTo("#formOficinas");
+        $("<label/>", {
+            text: "Oficina por defecto en LockBox"
+        }).appendTo("#formOficinas");
+        $("<br/>").appendTo("#formOficinas");
+        $("<input/>", {
+            name: "selectOficina",
+            value: "nueva",
+            type: "radio"
+        }).appendTo("#formOficinas");
+        $("<label/>", {
+            text: "Oficina bueva"
+        }).appendTo("#formOficinas");
+        $("<br/>").appendTo("#formOficinas");
+        $("<select/>", {
+            id: "selectOficinas"
+        }).appendTo("#formOficinas");
+        var pais="";
+        var ciudad="";
+        $("<option/>",{
+            label: "Selecciona oficina",
+            disabled:true,
+            selected: true
+        }).appendTo("#selectOficinas");
+        $(datos.oficinas).each(function(index, el){
+            if (pais !== el.pais){
+                pais=el.pais;
+                $("<optgroup/>",{
+                    id: 'opt'+pais.replace(/\s/g, ''),
+                    label: pais
+                }).appendTo($("#selectOficinas"));
+                ciudad=el.ciudad;
+                $("<option/>",{
+                    id: 'opt'+ciudad.replace(/\s/g, ''),
+                    label: ciudad,
+                    disabled:true
+                }).appendTo($("#opt"+pais.replace(/\s/g, '')));
+            } else {
+                if (ciudad !== el.ciudad){
+                    ciudad = el.ciudad;
+                    $("<option/>",{
+                        id: 'opt'+ciudad.replace(/\s/g, ''),
+                        label: ciudad,
+                        disabled: true
+                    }).appendTo($("#opt"+pais.replace(/\s/g, '')));
+                }
+            }
+            $("<option/>", {
+                value: el.id,
+                text: el.calle
+            }).appendTo("#opt"+pais.replace(/\s/g, ''));
+        });
+        $("<br/>").appendTo("#formOficinas");
+        $("<br/>").appendTo("#formOficinas");
+        $("<input/>", {
+            type: "submit",
+            value: "Finalizar Compra",
+            class: "btn btn-info"
+        }).appendTo("#formOficinas");
+        console.log(datos.usuario.name);
+        console.log(datos.oficinas[0].calle);
     }
 });
 

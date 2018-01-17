@@ -20,20 +20,12 @@ $( document ).ready(function(){
            url: url,
            success: function(data) {
                if (data !== ""){
-                   console.log("usuario");
+                   continuarCompra(data);
                } else {
                    loginLockBox();
                }
-               // if (data==="FALSE"){
-               //     loginLockBox();
-               //     console.log(data);
-               // } else {
-               //     continuarCompra(data);
-               // }
-               // console.log(data);
            },
-           // CrossDomain:true,
-           error: function (xhr, ajaxOptions, thrownError) { //Add these parameters to display the required response
+           error: function (xhr, ajaxOptions, thrownError) {
                alert(xhr.status);
                alert(xhr.responseText);
           }
@@ -57,10 +49,6 @@ $( document ).ready(function(){
         });
     }
 
-    function continuarCompra(usuario){
-
-    }
-
     function montarLogin(data) {
         $("#modalHeader").text("Inicio Sesión LockBox");
         $("#continuarCompra").remove();
@@ -77,8 +65,39 @@ $( document ).ready(function(){
             class: 'btn btn-default'
         }).attr('data-dismiss', 'modal').appendTo("#modalFooter");
         $(data).find("form").appendTo("#modalBody");
+        $("body form").attr("action", "http://localhost/proyectoFinal/loginExt");
+        submitLogin();
     }
 
+    function submitLogin() {
+        $("#loginForm").on("submit", function (event) {
+            var url = $(this).attr("action");
+            var datosFormulario=$(this).serialize();
+            event.preventDefault();
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: datosFormulario,
+                success: function (data) {
+                    if(data !== "FALSE") {
+                        continuarCompra(data);
+                    } else {
+                        alert("Cuenta no verificada, hazlo para continuar");
+                    }
+                },
+                // CrossDomain:true,
+                error: function (xhr, ajaxOptions, thrownError) { //Add these parameters to display the required response
+                    alert(xhr.status);
+                    alert(xhr.responseText);
+                }
+            });
+        })
+    }
+
+    function continuarCompra(usuario){
+        $("#modalBody").children().remove();
+        $("#modalBody").append("Oficinas!!!")
+    }
 });
 
 

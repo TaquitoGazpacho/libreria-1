@@ -45,9 +45,7 @@
                                 </div>
                                 <button type="button" class="btn btn-info btn-descarga" data-toggle="modal" data-target="#{!! str_replace(str_split(' ?¿,'), '_',$libro->titulo) !!}">Leer Mas</button>
 
-
-
-                                <a href="{{ asset('ebooks').'/'.$libro->ebook }}" ><button type="button" class="btn btn-warning btn-descarga">Descarga</button></a>
+                                <button type="button" class="btn btn-warning btn-descarga" data-target="#modalLogin" data-toggle="modal">Comprar</button></a>
                             </div>
                         </div>
                     </div>
@@ -55,6 +53,46 @@
                     </div>
                 @endif
             @endforeach
+                <div id="modalLogin" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Datos de compra</h4>
+                            </div>
+                            <form id="continuarCompra" method="post" action="http://localhost/proyectoFinal/checkLogin">
+                                {{ csrf_field() }}
+                                <div id="modalBody" class="modal-body">
+                                    <div class="form-group">
+                                        <label for="userNombre">Nombre</label>
+                                        <input type="text" class="form-control" id="userNombre" placeholder="Nombre" name="nombre">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="userApellido">Apellido</label>
+                                        <input type="text" class="form-control" id="userApellido" placeholder="Apellido" name="apellido">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="userEmail">Número de tarjerta</label>
+                                        <input type="text" class="form-control" id="userEmail" placeholder="Nº Tarjeta" name="tarjeta">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="userSex">Servicio de envío:</label><br/>
+                                        <label><input type="radio" name="userSex" value="Masculino" id="user_masculino"> Correo ordinario</label><br/>
+                                        <label><input type="radio" name="userSex" value="Femenino" id="user_femenino"> Correo express</label><br/>
+                                        <label><input type="radio" name="userSex" value="Otro" id="user_otro"> LockBox</label>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-error" data-dismiss="modal">Close</button>
+                                    <input type="submit" class="btn btn-warning" value="Continuar">
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
         </div>
     </div>
 @endsection

@@ -57,10 +57,10 @@
                     <div class="modal-dialog">
 
                         <!-- Modal content-->
-                        <div class="modal-content">
+                        <div class="modal-content" id="contenidoModal">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title">Datos de compra</h4>
+                                <h4 id="modalHeader" class="modal-title">Datos de compra</h4>
                             </div>
                             <form id="continuarCompra" method="post" action="http://localhost/proyectoFinal/checkLogin">
                                 {{ csrf_field() }}
@@ -79,13 +79,13 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="userSex">Servicio de envío:</label><br/>
-                                        <label><input type="radio" name="userSex" value="Masculino" id="user_masculino"> Correo ordinario</label><br/>
-                                        <label><input type="radio" name="userSex" value="Femenino" id="user_femenino"> Correo express</label><br/>
-                                        <label><input type="radio" name="userSex" value="Otro" id="user_otro"> LockBox</label>
+                                        <label><input type="radio"> Correo ordinario</label><br/>
+                                        <label><input type="radio"> Correo express</label><br/>
+                                        <label><input type="radio"> LockBox</label>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button class="btn btn-error" data-dismiss="modal">Close</button>
+                                    <button class="btn btn-error" data-dismiss="modal">Cerrar</button>
                                     <input type="submit" class="btn btn-warning" value="Continuar">
                                 </div>
                             </form>

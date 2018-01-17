@@ -15,63 +15,70 @@ $( document ).ready(function(){
         event.preventDefault();
         var datosFormulario=$(this).serialize();
         var url="http://localhost/proyectoFinal/checkLogin";
-        $.post(url, datosFormulario, function (response) {
-            console.log(response);
+        $.ajax({
+           type: "POST",
+           url: url,
+           success: function(data) {
+               if (data !== ""){
+                   console.log("usuario");
+               } else {
+                   loginLockBox();
+               }
+               // if (data==="FALSE"){
+               //     loginLockBox();
+               //     console.log(data);
+               // } else {
+               //     continuarCompra(data);
+               // }
+               // console.log(data);
+           },
+           // CrossDomain:true,
+           error: function (xhr, ajaxOptions, thrownError) { //Add these parameters to display the required response
+               alert(xhr.status);
+               alert(xhr.responseText);
+          }
         });
-        // console.log(JSON.stringify(datosFormulario));
-        // $.ajax({
-        //    type: "POST",
-        //    url: url,
-        //    data: JSON.stringify(datosFormulario),
-        //    success: function(data) {
-        //        console.log(data);
-        //    },
-        //    // dataType: "json",
-        //    CrossDomain:true,
-        //    // processData: false,
-        //    // contentType: 'application/json',
-        //    // async: true,
-        //    error: function (xhr, ajaxOptions, thrownError) { //Add these parameters to display the required response
-        //        alert(xhr.status);
-        //        alert(xhr.responseText);
-        //   }
-        // });
-        // $.ajax({
-        //     type: "POST",
-        //     url: url,
-        //     data: { somefield: "Some field value", _token: '{{csrf_token()}}' },
-        //     success: function (data) {
-        //         console.log(data);
-        //     },
-        //     error: function (data, textStatus, errorThrown) {
-        //         console.log(data);
-        //
-        //     },
-        // });
+
     });
 
+    function loginLockBox(){
+        var url = "http://localhost/proyectoFinal/getLoginHTML";
+        $.ajax({
+            type: "POST",
+            url: url,
+            success: function(data) {
+                montarLogin(data);
+            },
+            // CrossDomain:true,
+            error: function (xhr, ajaxOptions, thrownError) { //Add these parameters to display the required response
+                alert(xhr.status);
+                alert(xhr.responseText);
+            }
+        });
+    }
 
-    // $.ajax({
-    //     url: "http://localhost:8080/auth",
-    //     type: "POST",
-    //     dataType: 'json',
-    //     data: JSON.stringify(data),
-    //     processData: false,
-    //     contentType: 'application/json',
-    //     CrossDomain:true,
-    //     async: false,
-    //     success: function (data) {
-    //         console.log(data);
-    //     },
-    //     error: function (xhr, ajaxOptions, thrownError) { //Add these parameters to display the required response
-    //         alert(xhr.status);
-    //         alert(xhr.responseText);
-    //     }
-    // });
+    function continuarCompra(usuario){
 
-    // function acceso(data) {
-    //
-    // }
+    }
+
+    function montarLogin(data) {
+        $("#modalHeader").text("Inicio Sesión LockBox");
+        $("#continuarCompra").remove();
+        $("<div/>",{
+            id: 'modalBody',
+            class: 'modal-body'
+        }).appendTo("#contenidoModal");
+        $("<div/>",{
+            id: 'modalFooter',
+            class: 'modal-footer'
+        }).appendTo("#contenidoModal");
+        $("<button/>",{
+            text: 'Cerrar',
+            class: 'btn btn-default'
+        }).attr('data-dismiss', 'modal').appendTo("#modalFooter");
+        $(data).find("form").appendTo("#modalBody");
+    }
+
 });
 
 

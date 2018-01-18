@@ -62,7 +62,7 @@
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 <h4 id="modalHeader" class="modal-title">Datos de compra</h4>
                             </div>
-                            <form id="continuarCompra" method="post" action="http://localhost/proyectoFinal/checkLogin">
+                            <form id="continuarCompra" method="post" action={{env('URL_LOCKBOX')."/checkLogin"}}>
                                 {{ csrf_field() }}
                                 <div id="modalBody" class="modal-body">
                                     <div class="form-group">

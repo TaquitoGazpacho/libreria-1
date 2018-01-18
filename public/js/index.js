@@ -6,15 +6,17 @@ function headerSize(){
 }
 
 $( document ).ready(function(){
+    var url_lockbox="http://localhost/taquitoGazpacho";
 
     $("#continuarCompra").on("submit", function(event){
         event.preventDefault();
         var datosFormulario=$(this).serialize();
-        var url="http://localhost/proyectoFinal/checkLogin";
+        var url=url_lockbox+"/checkLogin";
         $.ajax({
            type: "POST",
            url: url,
            success: function(data) {
+               console.log(data);
                if (data !== ""){
                    $(".modal-footer input[type='submit']").remove();
                    continuarCompra(data);
@@ -31,7 +33,7 @@ $( document ).ready(function(){
     });
 
     function loginLockBox(){
-        var url = "http://localhost/proyectoFinal/getLoginHTML";
+        var url = url_lockbox+"/getLoginHTML";
         $.ajax({
             type: "POST",
             url: url,
@@ -66,7 +68,7 @@ $( document ).ready(function(){
         $("#continuarCompra").remove();
         montarModal();
         $(data).find("form").appendTo("#modalBody");
-        $("body form").attr("action", "http://localhost/proyectoFinal/loginExt");
+        $("body form").attr("action", url_lockbox+"/loginExt");
         submitLogin();
     }
 
@@ -104,7 +106,7 @@ $( document ).ready(function(){
         $("#modalBody").append("OFICINAS");
         $("<form/>", {
             id: "formOficinas",
-            action: "http://localhost/proyectoFinal/crearPedido",
+            action: url_lockbox+"/crearPedido",
             method: "post"
         }).appendTo("#modalBody");
         $("<input/>", {
@@ -229,7 +231,7 @@ $( document ).ready(function(){
         $("<a/>", {
             text: "Ir a LockBox",
             class: "btn btn-warning",
-            href: "http://localhost/proyectoFinal/perfil/pedidos"
+            href: url_lockbox+"/perfil/pedidos"
         }).appendTo(".modal-footer");
     }
 

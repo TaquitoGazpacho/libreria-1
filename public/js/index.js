@@ -15,11 +15,11 @@ $( document ).ready(function(){
         $.ajax({
            type: "POST",
            url: url,
-           success: function(data) {
-               console.log(data);
-               if (data !== ""){
+           success: function(response) {
+               console.log(response);
+               if (response !== ""){
                    $(".modal-footer input[type='submit']").remove();
-                   continuarCompra(data);
+                   continuarCompra(response);
                } else {
                    loginLockBox();
                }
@@ -37,8 +37,8 @@ $( document ).ready(function(){
         $.ajax({
             type: "POST",
             url: url,
-            success: function(data) {
-                montarLogin(data);
+            success: function(response) {
+                montarLogin(response);
             },
             // CrossDomain:true,
             error: function (xhr, ajaxOptions, thrownError) { //Add these parameters to display the required response
@@ -69,10 +69,10 @@ $( document ).ready(function(){
         montarModal();
         $(data).find("form").appendTo("#modalBody");
         $("body form").attr("action", url_lockbox+"/loginExt");
-        $("#loginForm").on("submit",  submitLogin(event));
+        $("#loginForm").on("submit", submitLogin);
     }
 
-    function submitLogin() {
+    function submitLogin(event) {
         var url = $(this).attr("action");
         var datosFormulario=$(this).serialize();
         event.preventDefault();
@@ -191,7 +191,7 @@ $( document ).ready(function(){
             placeholder: "Selecciona oficina"
         });
 
-        $("#formOficinas").on("submit", submitOficinas(event));
+        $("#formOficinas").on("submit", submitOficinas);
     }
 
     function submitOficinas() {

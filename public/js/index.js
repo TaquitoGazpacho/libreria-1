@@ -10,7 +10,7 @@ $( document ).ready(function(){
 
     $("#continuarCompra").on("submit", function(event){
         event.preventDefault();
-        var datosFormulario=$(this).serialize();
+        // var datosFormulario=$(this).serialize();
         var url=url_lockbox+"/checkLogin";
         $.ajax({
            type: "POST",
@@ -69,32 +69,30 @@ $( document ).ready(function(){
         montarModal();
         $(data).find("form").appendTo("#modalBody");
         $("body form").attr("action", url_lockbox+"/loginExt");
-        submitLogin();
+        $("#loginForm").on("submit",  submitLogin(event));
     }
 
     function submitLogin() {
-        $("#loginForm").on("submit", function (event) {
-            var url = $(this).attr("action");
-            var datosFormulario=$(this).serialize();
-            event.preventDefault();
-            $.ajax({
-                type: "POST",
-                url: url,
-                data: datosFormulario,
-                success: function (response) {
-                    if(response !== "FALSE") {
-                        continuarCompra(response);
-                    } else {
-                        alert("Cuenta no verificada, hazlo para continuar");
-                    }
-                },
-                // CrossDomain:true,
-                error: function (xhr, ajaxOptions, thrownError) { //Add these parameters to display the required response
-                    alert(xhr.status);
-                    alert(xhr.responseText);
+        var url = $(this).attr("action");
+        var datosFormulario=$(this).serialize();
+        event.preventDefault();
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: datosFormulario,
+            success: function (response) {
+                if(response !== "FALSE") {
+                    continuarCompra(response);
+                } else {
+                    alert("Cuenta no verificada, hazlo para continuar");
                 }
-            });
-        })
+            },
+            // CrossDomain:true,
+            error: function (xhr, ajaxOptions, thrownError) { //Add these parameters to display the required response
+                alert(xhr.status);
+                alert(xhr.responseText);
+            }
+        });
     }
 
     function continuarCompra(datos){
@@ -193,30 +191,28 @@ $( document ).ready(function(){
             placeholder: "Selecciona oficina"
         });
 
-        submitOficinas();
+        $("#formOficinas").on("submit", submitOficinas(event));
     }
 
     function submitOficinas() {
 
-        $("#formOficinas").on("submit", function (event) {
-            var url = $(this).attr("action");
-            var datosFormulario=$(this).serialize();
-            event.preventDefault();
-            $.ajax({
-                type: "POST",
-                url: url,
-                data: datosFormulario,
-                success: function(response) {
-                    if (response==="TRUE"){
-                        confirmarPedido();
-                    }
-                },
-                error: function (xhr, ajaxOptions, thrownError) { //Add these parameters to display the required response
-                    alert(xhr.status);
-                    alert(xhr.responseText);
+        var url = $(this).attr("action");
+        var datosFormulario=$(this).serialize();
+        event.preventDefault();
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: datosFormulario,
+            success: function(response) {
+                if (response==="TRUE"){
+                    confirmarPedido();
                 }
-            });
-        })
+            },
+            error: function (xhr, ajaxOptions, thrownError) { //Add these parameters to display the required response
+                alert(xhr.status);
+                alert(xhr.responseText);
+            }
+        });
 
     }
 

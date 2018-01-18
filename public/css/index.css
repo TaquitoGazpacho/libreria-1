@@ -324,3 +324,12 @@ header> .desc > h3{
 #services, #services i{
     color: orange;
 }
+
+/*------------------------------------------- SELECT2 CLASSES --------------------------------------------*/
+
+.select-ciudad {
+    color: black;
+}
+.select-calle {
+    text-indent: 50px;
+}

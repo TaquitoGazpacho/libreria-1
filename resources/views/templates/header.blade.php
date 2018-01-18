@@ -12,7 +12,9 @@
 <!-- Latest compiled JavaScript -->
 <script src="{{URL::asset('/bootstrap/js/bootstrap.js')}}"></script>
 
-
+<!--Select2-->
+<link rel="stylesheet" href="{{ URL::asset('css/select2.min.css') }}">
+<script src="{{ asset('js/select2.min.js') }}"></script>
 
 <link rel="stylesheet" href="{{URL::asset('/css/index.css')}}">
 

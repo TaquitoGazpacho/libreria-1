@@ -5,10 +5,6 @@ function headerSize(){
     header.style.height= window.innerHeight+'px';
 }
 
-function handler() {
-    console.log("HOla");
-}
-
 $( document ).ready(function(){
 
     $("#continuarCompra").on("submit", function(event){
@@ -50,9 +46,7 @@ $( document ).ready(function(){
         });
     }
 
-    function montarLogin(data) {
-        $("#modalHeader").text("Inicio Sesión LockBox");
-        $("#continuarCompra").remove();
+    function montarModal() {
         $("<div/>",{
             id: 'modalBody',
             class: 'modal-body'
@@ -65,6 +59,12 @@ $( document ).ready(function(){
             text: 'Cerrar',
             class: 'btn btn-default'
         }).attr('data-dismiss', 'modal').appendTo("#modalFooter");
+    }
+
+    function montarLogin(data) {
+        $("#modalHeader").text("Inicio Sesión LockBox");
+        $("#continuarCompra").remove();
+        montarModal();
         $(data).find("form").appendTo("#modalBody");
         $("body form").attr("action", "http://localhost/proyectoFinal/loginExt");
         submitLogin();
@@ -79,9 +79,9 @@ $( document ).ready(function(){
                 type: "POST",
                 url: url,
                 data: datosFormulario,
-                success: function (data) {
-                    if(data !== "FALSE") {
-                        continuarCompra(data);
+                success: function (response) {
+                    if(response !== "FALSE") {
+                        continuarCompra(response);
                     } else {
                         alert("Cuenta no verificada, hazlo para continuar");
                     }
@@ -96,20 +96,32 @@ $( document ).ready(function(){
     }
 
     function continuarCompra(datos){
-        $("#modalBody").children().remove();
+        var idOfi = datos.usuario.oficina_id;
+        var nombreOfi = "";
+        $("#modalBody").remove();
+        $(".modal-footer").remove();
+        montarModal();
         $("#modalBody").append("OFICINAS");
         $("<form/>", {
             id: "formOficinas",
-            action: "#",
-            method: "post",
+            action: "http://localhost/proyectoFinal/crearPedido",
+            method: "post"
         }).appendTo("#modalBody");
+        $("<input/>", {
+            name: "userId",
+            value: datos.usuario.id,
+            type: "number",
+            class: "hidden"
+        }).appendTo("#formOficinas");
         $("<input/>", {
             name: "selectOficina",
             value: "defecto",
-            type: "radio"
+            type: "radio",
+            checked: true
         }).appendTo("#formOficinas");
         $("<label/>", {
-            text: "Oficina por defecto en LockBox"
+            text: "Oficina por defecto en LockBox: ",
+            id: "ofiDefectoNombre"
         }).appendTo("#formOficinas");
         $("<br/>").appendTo("#formOficinas");
         $("<input/>", {
@@ -118,20 +130,21 @@ $( document ).ready(function(){
             type: "radio"
         }).appendTo("#formOficinas");
         $("<label/>", {
-            text: "Oficina bueva"
+            text: "Oficina nueva"
         }).appendTo("#formOficinas");
         $("<br/>").appendTo("#formOficinas");
         $("<select/>", {
-            id: "selectOficinas"
+            id: "selectOficinas",
+            name: "oficinaNueva",
+            class: "form-control select2"
         }).appendTo("#formOficinas");
+        $("<option/>").appendTo("#selectOficinas");
         var pais="";
         var ciudad="";
-        $("<option/>",{
-            label: "Selecciona oficina",
-            disabled:true,
-            selected: true
-        }).appendTo("#selectOficinas");
         $(datos.oficinas).each(function(index, el){
+            if (el.id === idOfi){
+                $("#ofiDefectoNombre").append(el.calle+", "+el.num_calle);
+            }
             if (pais !== el.pais){
                 pais=el.pais;
                 $("<optgroup/>",{
@@ -141,22 +154,25 @@ $( document ).ready(function(){
                 ciudad=el.ciudad;
                 $("<option/>",{
                     id: 'opt'+ciudad.replace(/\s/g, ''),
-                    label: ciudad,
-                    disabled:true
+                    text: ciudad,
+                    disabled:true,
+                    class: "select-ciudad"
                 }).appendTo($("#opt"+pais.replace(/\s/g, '')));
             } else {
                 if (ciudad !== el.ciudad){
                     ciudad = el.ciudad;
                     $("<option/>",{
                         id: 'opt'+ciudad.replace(/\s/g, ''),
-                        label: ciudad,
-                        disabled: true
+                        text: ciudad,
+                        disabled: true,
+                        class: "select-ciudad"
                     }).appendTo($("#opt"+pais.replace(/\s/g, '')));
                 }
             }
             $("<option/>", {
                 value: el.id,
-                text: el.calle
+                text: el.calle+", "+el.num_calle,
+                class: "select-calle"
             }).appendTo("#opt"+pais.replace(/\s/g, ''));
         });
         $("<br/>").appendTo("#formOficinas");
@@ -166,9 +182,57 @@ $( document ).ready(function(){
             value: "Finalizar Compra",
             class: "btn btn-info"
         }).appendTo("#formOficinas");
-        console.log(datos.usuario.name);
-        console.log(datos.oficinas[0].calle);
+        $("label").css(
+            "font-weight", "normal"
+        );
+
+        //Initialize Select2 Elements
+        $('.select2').select2({
+            placeholder: "Selecciona oficina"
+        });
+
+        submitOficinas();
     }
+
+    function submitOficinas() {
+
+        $("#formOficinas").on("submit", function (event) {
+            var url = $(this).attr("action");
+            var datosFormulario=$(this).serialize();
+            event.preventDefault();
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: datosFormulario,
+                success: function(response) {
+                    if (response==="TRUE"){
+                        confirmarPedido();
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) { //Add these parameters to display the required response
+                    alert(xhr.status);
+                    alert(xhr.responseText);
+                }
+            });
+        })
+
+    }
+
+    function confirmarPedido() {
+        $("#modalBody").remove();
+        $(".modal-footer").remove();
+        montarModal();
+        $("<h2/>", {
+            text: "Pedido realizado satisfactoriamente",
+            class: "text-center"
+        }).appendTo("#modalBody");
+        $("<a/>", {
+            text: "Ir a LockBox",
+            class: "btn btn-warning",
+            href: "http://localhost/proyectoFinal/perfil/pedidos"
+        }).appendTo(".modal-footer");
+    }
+
 });
 
 

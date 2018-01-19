@@ -6,7 +6,7 @@ function headerSize(){
 }
 
 $( document ).ready(function(){
-    var url_lockbox="http://localhost/taquitoGazpacho";
+    var url_lockbox="http://electricsheep.es/taquitoGazpacho";
 
     $("#continuarCompra").on("submit", function(event){
         event.preventDefault();
@@ -16,7 +16,6 @@ $( document ).ready(function(){
            type: "POST",
            url: url,
            success: function(response) {
-               console.log(response);
                if (response !== ""){
                    $(".modal-footer input[type='submit']").remove();
                    continuarCompra(response);
@@ -194,7 +193,7 @@ $( document ).ready(function(){
         $("#formOficinas").on("submit", submitOficinas);
     }
 
-    function submitOficinas() {
+    function submitOficinas(event) {
 
         var url = $(this).attr("action");
         var datosFormulario=$(this).serialize();

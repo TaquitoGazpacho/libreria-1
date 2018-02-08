@@ -67,21 +67,29 @@
                                 <div id="modalBody" class="modal-body">
                                     <div class="form-group">
                                         <label for="userNombre">Nombre</label>
-                                        <input type="text" class="form-control" id="userNombre" placeholder="Nombre" name="nombre">
+                                        <input type="text" class="form-control" id="userNombre" placeholder="Nombre" name="nombre" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="userApellido">Apellido</label>
-                                        <input type="text" class="form-control" id="userApellido" placeholder="Apellido" name="apellido">
+                                        <input type="text" class="form-control" id="userApellido" placeholder="Apellido" name="apellido" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="userEmail">Número de tarjerta</label>
-                                        <input type="text" class="form-control" id="userEmail" placeholder="Nº Tarjeta" name="tarjeta">
+                                        <input type="text" class="form-control" id="userEmail" placeholder="Nº Tarjeta" name="tarjeta" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="userEmail">Fecha de caducidad</label>
+                                        <input type="text" class="form-control" id="userEmail" placeholder="dd/mm/aaaa" name="tarjeta" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="userEmail">CVV</label>
+                                        <input type="text" class="form-control" id="userEmail" placeholder="Codigo de seguridad" name="tarjeta" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="userSex">Servicio de envío:</label><br/>
-                                        <label><input type="radio"> Correo ordinario</label><br/>
-                                        <label><input type="radio"> Correo express</label><br/>
-                                        <label><input type="radio"> LockBox</label>
+                                        <label><input name="userSex" type="radio"> Correo ordinario</label><br/>
+                                        <label><input name="userSex" type="radio"> Correo express</label><br/>
+                                        <label><input name="userSex" type="radio" checked> LockBox</label>
                                     </div>
                                 </div>
                                 <div class="modal-footer">

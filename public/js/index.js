@@ -6,7 +6,7 @@ function headerSize(){
 }
 
 $( document ).ready(function(){
-    var url_lockbox="http://electricsheep.es/taquitoGazpacho";
+    var url_lockbox="http://localhost/proyectoFinal";
 
     $("#continuarCompra").on("submit", function(event){
         event.preventDefault();
